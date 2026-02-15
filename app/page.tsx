@@ -291,13 +291,15 @@ export default function Home() {
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {[...Array(20)].map((_, i) => {
               const IconComp = currentPageData.decorIcons[i % currentPageData.decorIcons.length];
+              const randomX = Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920);
+              const randomY = Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080);
               return (
                 <motion.div
                   key={`${currentPage}-${i}`}
                   className="absolute"
                   initial={{
-                    x: Math.random() * window.innerWidth,
-                    y: Math.random() * window.innerHeight,
+                    x: randomX,
+                    y: randomY,
                     scale: 0,
                     opacity: 0,
                   }}
