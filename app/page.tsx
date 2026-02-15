@@ -281,8 +281,8 @@ export default function Home() {
                 key={i}
                 className="absolute"
                 initial={{
-                  x: Math.random() * window.innerWidth,
-                  y: Math.random() * window.innerHeight,
+                  x: Math.random() * 1920,
+                  y: Math.random() * 1080,
                   scale: 0,
                 }}
                 animate={{
