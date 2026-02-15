@@ -280,7 +280,7 @@ export default function ComplimentsPage() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-6 sm:mb-8"
+          className="text-center mb-4 sm:mb-6 md:mb-8"
         >
           <motion.h1
             animate={{
@@ -342,7 +342,7 @@ export default function ComplimentsPage() {
         </motion.div>
 
         {/* Compliment Display Area */}
-        <div className="relative w-full max-w-2xl h-56 sm:h-64 md:h-80 mb-6 sm:mb-8 flex items-center justify-center px-2">
+        <div className="relative w-full max-w-2xl h-56 sm:h-64 md:h-96 lg:h-[420px] mb-4 sm:mb-6 md:mb-8 flex items-center justify-center px-2">
           <AnimatePresence mode="wait">
             {currentCompliment && (
               <motion.div
@@ -352,22 +352,12 @@ export default function ComplimentsPage() {
                   scale: 1, 
                   rotate: 0, 
                   opacity: 1,
-                  ...(isFinished && {
-                    scale: [1, 1.05, 1],
-                  })
                 }}
                 exit={{ scale: 0, rotate: 90, opacity: 0 }}
                 transition={{
                   type: "spring",
                   stiffness: 150,
                   damping: 20,
-                  ...(isFinished && {
-                    scale: {
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }
-                  })
                 }}
                 className={`${currentCompliment.color} p-6 sm:p-8 md:p-12 rounded-3xl shadow-2xl ${currentCompliment.shadow || ''} border-4 border-white max-w-lg w-full ${isFinished ? 'border-8 shadow-3xl' : ''} relative overflow-hidden`}
               >
@@ -388,13 +378,12 @@ export default function ComplimentsPage() {
                 />
                 <motion.div
                   animate={{
-                    rotate: isFinished ? [0, 10, -10, 10, -10, 0] : [0, 10, -10, 0],
-                    scale: isFinished ? [1, 1.2, 1] : 1,
+                    rotate: isFinished ? 0 : [0, 10, -10, 0],
                   }}
                   transition={{
-                    duration: isFinished ? 2 : 0.5,
-                    repeat: Infinity,
-                    repeatDelay: isFinished ? 0 : 1,
+                    duration: 0.5,
+                    repeat: isFinished ? 0 : Infinity,
+                    repeatDelay: 1,
                   }}
                   className="flex justify-center mb-4 sm:mb-6 relative z-10"
                 >
@@ -402,8 +391,7 @@ export default function ComplimentsPage() {
                   {/* Icon glow effect */}
                   <motion.div
                     animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3],
+                      opacity: [0.3, 0.5, 0.3],
                     }}
                     transition={{
                       duration: 2,
@@ -450,7 +438,7 @@ export default function ComplimentsPage() {
               }}
               className="relative z-10"
             >
-              {count === compliments.length ? "klik untuk pesan terakhir" : "lagi"}
+              {count === compliments.length ? "klik untuk pesan terakhir" : "Next"}
             </motion.span>
           </motion.button>
         )}
