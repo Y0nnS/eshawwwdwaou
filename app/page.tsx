@@ -124,33 +124,6 @@ export default function Home() {
           }}
           className={`absolute inset-0 ${currentPageData.bgColor} flex items-center justify-center`}
         >
-          {/* Floating Decorative Icons */}
-          {currentPageData.decorIcons.map((emoji, index) => (
-            <motion.div
-              key={index}
-              className="absolute text-4xl md:text-6xl opacity-20"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: 0.2,
-                scale: 1,
-                x: [0, Math.random() * 30 - 15],
-                y: [0, Math.random() * 30 - 15],
-              }}
-              transition={{
-                duration: 2,
-                delay: index * 0.1,
-                repeat: Infinity,
-                repeatType: 'reverse',
-              }}
-              style={{
-                left: `${15 + index * 15}%`,
-                top: `${20 + (index % 3) * 25}%`,
-              }}
-            >
-              {emoji}
-            </motion.div>
-          ))}
-
           {/* Main Content Container */}
           <div className="relative z-10 flex flex-col items-center justify-center px-8 max-w-2xl">
             {/* Animated Icon */}
@@ -176,7 +149,7 @@ export default function Home() {
                 }}
                 className="mb-8"
               >
-                <IconComponent className="text-white text-8xl md:text-9xl drop-shadow-2xl" />
+                <IconComponent className="text-white text-6xl md:text-9xl drop-shadow-2xl" />
               </motion.div>
             </motion.div>
 
@@ -185,7 +158,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-5xl md:text-7xl font-black text-white text-center mb-4 text-shadow-cute"
+              className="text-3xl md:text-7xl font-black text-white text-center mb-3 text-shadow-cute"
             >
               {currentPageData.title}
             </motion.h1>
@@ -195,7 +168,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-4xl md:text-6xl font-bold text-white text-center mb-6 text-shadow-cute"
+              className="text-2xl md:text-6xl font-bold text-white text-center mb-4 text-shadow-cute"
             >
               {currentPageData.subtitle}
             </motion.h2>
@@ -205,7 +178,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="text-xl md:text-2xl text-white text-center mb-12 font-semibold text-shadow-cute max-w-lg"
+              className="text-base md:text-2xl text-white text-center mb-8 font-semibold text-shadow-cute max-w-lg px-4"
             >
               {currentPageData.message}
             </motion.p>
@@ -228,7 +201,7 @@ export default function Home() {
                 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={nextPage}
-                className={`${currentPageData.buttonColor} text-gray-800 font-black text-xl md:text-2xl px-12 py-6 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 border-4 border-white`}
+                className={`${currentPageData.buttonColor} text-gray-800 font-black text-lg md:text-2xl px-8 py-4 md:px-12 md:py-6 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 border-4 border-white`}
               >
                 <motion.span
                   animate={{
