@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import { 
   IoMoonSharp, 
   IoFastFoodSharp, 
@@ -10,73 +10,103 @@ import {
   IoCloudSharp,
   IoStarSharp,
   IoRocketSharp,
-  IoCafeSharp
+  IoCafeSharp,
+  IoRestaurantSharp,
+  IoWineSharp,
+  IoPizzaSharp,
+  IoIceCreamSharp,
+  IoWaterOutline,
+  IoSnowSharp,
+  IoRoseSharp,
+  IoBedSharp,
+  IoHeartSharp,
+  IoArrowForwardSharp,
+  IoChevronForwardSharp
 } from 'react-icons/io5';
 
 const pages = [
   {
     id: 0,
     title: "Selamat Malam",
-    subtitle: "Esha! 🌙",
+    subtitle: "Esha!",
     message: "Halo kamu yang baik hati~",
     icon: IoMoonSharp,
-    bgColor: "bg-[#6B5B95]",
-    buttonColor: "bg-cute-purple",
-    buttonText: "Hehe, iya nih! 👉",
-    decorIcons: ['⭐', '🌙', '✨', '💫', '🌟'],
+    bgColor: "#6B5B95",
+    buttonColor: "bg-white",
+    buttonTextColor: "text-[#6B5B95]",
+    buttonText: "Hehe, iya nih",
+    decorIcons: [IoStarSharp, IoMoonSharp, IoSparklesSharp],
   },
   {
     id: 1,
     title: "Jangan Lupa",
-    subtitle: "Makan ya! 🍜",
+    subtitle: "Makan ya!",
     message: "Perut kenyang, hati senang, hidup tenang!",
     icon: IoFastFoodSharp,
-    bgColor: "bg-[#FF6B9D]",
-    buttonColor: "bg-cute-pink",
-    buttonText: "Siap! 🍱",
-    decorIcons: ['🍕', '🍔', '🍜', '🍰', '🥗'],
+    bgColor: "#FF6B9D",
+    buttonColor: "bg-white",
+    buttonTextColor: "text-[#FF6B9D]",
+    buttonText: "Siap",
+    decorIcons: [IoPizzaSharp, IoRestaurantSharp, IoIceCreamSharp],
   },
   {
     id: 2,
     title: "Jangan Lupa",
-    subtitle: "Mandi juga! 🛁",
+    subtitle: "Mandi juga!",
     message: "Biar fresh, bersih, dan wangi sepanjang hari~",
     icon: IoWaterSharp,
-    bgColor: "bg-[#4ECDC4]",
-    buttonColor: "bg-cute-mint",
-    buttonText: "Okee! 🚿",
-    decorIcons: ['🛁', '🚿', '💧', '🧼', '🫧'],
+    bgColor: "#4ECDC4",
+    buttonColor: "bg-white",
+    buttonTextColor: "text-[#4ECDC4]",
+    buttonText: "Okee",
+    decorIcons: [IoWaterOutline, IoSnowSharp, IoSparklesSharp],
   },
   {
     id: 3,
     title: "Jangan Lupa",
-    subtitle: "Skincare-an! ✨",
+    subtitle: "Skincare-an!",
     message: "Rawat kulitmu biar makin glowing kayak bulan!",
     icon: IoSparklesSharp,
-    bgColor: "bg-[#FFE66D]",
-    buttonColor: "bg-cute-yellow",
-    buttonText: "Pasti! 🧴",
-    decorIcons: ['✨', '💅', '🌸', '🧴', '💄'],
+    bgColor: "#FFE66D",
+    buttonColor: "bg-white",
+    buttonTextColor: "text-[#FFE66D]",
+    buttonText: "Pasti",
+    decorIcons: [IoSparklesSharp, IoRoseSharp, IoStarSharp],
   },
   {
     id: 4,
     title: "Udah gtu aja",
-    subtitle: "Selamat Bobo! 😴",
-    message: "Mimpi indah ya Esha, sampai ketemu lagi besok~ 💕",
+    subtitle: "Selamat Bobo!",
+    message: "Mimpi indah ya Esha, sampai ketemu lagi besok~",
     icon: IoCloudSharp,
-    bgColor: "bg-[#C06C84]",
-    buttonColor: "bg-cute-peach",
-    buttonText: "🥰",
-    decorIcons: ['💤', '🌙', '💕', '🛌', '⭐'],
+    bgColor: "#C06C84",
+    buttonColor: "bg-white",
+    buttonTextColor: "text-[#C06C84]",
+    buttonText: "",
+    decorIcons: [IoCloudSharp, IoMoonSharp, IoHeartSharp, IoBedSharp, IoStarSharp],
   },
 ];
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [bgColor, setBgColor] = useState(pages[0].bgColor);
+  const x = useMotionValue(0);
+
+  // Smooth background color transition
+  useEffect(() => {
+    setBgColor(pages[currentPage].bgColor);
+  }, [currentPage]);
 
   const currentPageData = pages[currentPage];
   const IconComponent = currentPageData.icon;
+
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x < -swipeThreshold && currentPage < pages.length - 1) {
+      nextPage();
+    }
+  };
 
   const nextPage = () => {
     if (currentPage < pages.length - 1) {
@@ -107,7 +137,11 @@ export default function Home() {
   };
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
+    <motion.div 
+      className="relative w-screen h-screen overflow-hidden"
+      animate={{ backgroundColor: bgColor }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+    >
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={currentPage}
@@ -116,16 +150,20 @@ export default function Home() {
           initial="enter"
           animate="center"
           exit="exit"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={handleDragEnd}
           transition={{
             x: { type: 'spring', stiffness: 300, damping: 30 },
-            opacity: { duration: 0.3 },
-            scale: { duration: 0.3 },
-            rotate: { duration: 0.3 },
+            opacity: { duration: 0.4 },
+            scale: { duration: 0.4 },
+            rotate: { duration: 0.4 },
           }}
-          className={`absolute inset-0 ${currentPageData.bgColor} flex items-center justify-center`}
+          className="absolute inset-0 flex items-center justify-center"
         >
           {/* Main Content Container */}
-          <div className="relative z-10 flex flex-col items-center justify-center px-8 max-w-2xl">
+          <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-8 max-w-2xl w-full">
             {/* Animated Icon */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
@@ -158,7 +196,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-3xl md:text-7xl font-black text-white text-center mb-3 text-shadow-cute"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white text-center mb-2 sm:mb-3 text-shadow-cute px-2"
             >
               {currentPageData.title}
             </motion.h1>
@@ -168,7 +206,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-2xl md:text-6xl font-bold text-white text-center mb-4 text-shadow-cute"
+              className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-3 sm:mb-4 text-shadow-cute px-2"
             >
               {currentPageData.subtitle}
             </motion.h2>
@@ -178,7 +216,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="text-base md:text-2xl text-white text-center mb-8 font-semibold text-shadow-cute max-w-lg px-4"
+              className="text-sm sm:text-base md:text-xl lg:text-2xl text-white text-center mb-6 sm:mb-8 font-semibold text-shadow-cute max-w-lg px-4"
             >
               {currentPageData.message}
             </motion.p>
@@ -201,7 +239,7 @@ export default function Home() {
                 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={nextPage}
-                className={`${currentPageData.buttonColor} text-gray-800 font-black text-lg md:text-2xl px-8 py-4 md:px-12 md:py-6 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 border-4 border-white`}
+                className={`${currentPageData.buttonColor} ${currentPageData.buttonTextColor} font-black text-base sm:text-lg md:text-2xl px-8 py-3 sm:px-10 sm:py-4 md:px-12 md:py-6 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 border-4 border-white flex items-center gap-2 sm:gap-3`}
               >
                 <motion.span
                   animate={{
@@ -212,21 +250,23 @@ export default function Home() {
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
+                  className="flex items-center gap-2"
                 >
                   {currentPageData.buttonText}
+                  <IoChevronForwardSharp className="text-xl sm:text-2xl" />
                 </motion.span>
               </motion.button>
             )}
 
-            {/* Final Page Cloud Animation */}
+            {/* Final Page Icons Animation */}
             {currentPage === pages.length - 1 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.7 }}
-                className="flex gap-4 items-center"
+                className="flex gap-3 sm:gap-4 items-center flex-wrap justify-center"
               >
-                {[...Array(5)].map((_, i) => (
+                {currentPageData.decorIcons.map((IconComp, i) => (
                   <motion.div
                     key={i}
                     animate={{
@@ -240,41 +280,46 @@ export default function Home() {
                       ease: 'easeInOut',
                     }}
                   >
-                    <IoCloudSharp className="text-white text-4xl md:text-5xl drop-shadow-lg" />
+                    <IconComp className="text-white text-3xl sm:text-4xl md:text-5xl drop-shadow-lg" />
                   </motion.div>
                 ))}
               </motion.div>
             )}
           </div>
 
-          {/* Cute Floating Stars */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(15)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                initial={{
-                  x: Math.random() * 1920,
-                  y: Math.random() * 1080,
-                  scale: 0,
-                }}
-                animate={{
-                  scale: [0, 1, 0],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 2 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              >
-                <IoStarSharp className="text-white opacity-30 text-2xl" />
-              </motion.div>
-            ))}
+          {/* Cute Floating Decorations */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {[...Array(20)].map((_, i) => {
+              const IconComp = currentPageData.decorIcons[i % currentPageData.decorIcons.length];
+              return (
+                <motion.div
+                  key={`${currentPage}-${i}`}
+                  className="absolute"
+                  initial={{
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    scale: 0,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    scale: [0, 1, 0],
+                    rotate: [0, 180, 360],
+                    opacity: [0, 0.3, 0],
+                  }}
+                  transition={{
+                    duration: 3 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                >
+                  <IconComp className="text-white text-xl sm:text-2xl" />
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Progress Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3">
+          <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3 bg-white/20 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-white/30">
             {pages.map((page, index) => (
               <motion.div
                 key={page.id}
@@ -284,14 +329,27 @@ export default function Home() {
                   opacity: currentPage === index ? 1 : 0.5,
                 }}
                 transition={{ duration: 0.3 }}
-                className={`w-3 h-3 rounded-full bg-white shadow-lg ${
-                  currentPage === index ? 'ring-4 ring-white/50' : ''
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-white shadow-lg ${
+                  currentPage === index ? 'ring-2 sm:ring-4 ring-white/50' : ''
                 }`}
               />
             ))}
           </div>
+
+          {/* Swipe Hint - Only show on first page */}
+          {currentPage === 0 && (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: [0.5, 1, 0.5], x: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute bottom-24 sm:bottom-28 right-4 sm:right-8 flex items-center gap-2 text-white/70"
+            >
+              <span className="text-xs sm:text-sm font-semibold text-shadow-cute">Geser</span>
+              <IoArrowForwardSharp className="text-lg sm:text-xl" />
+            </motion.div>
+          )}
         </motion.div>
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
