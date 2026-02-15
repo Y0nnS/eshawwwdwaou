@@ -18,41 +18,43 @@ import {
 } from 'react-icons/io5';
 
 const compliments = [
-  { text: "kadang hidup emang berat, tapi kamu kuat kok. pasti bisa lewatin semua ini", color: "bg-gradient-to-br from-[#FF6B9D] via-[#FF8FB3] to-[#FFB6D9]", icon: IoRocketSharp, shadow: "shadow-pink-500/50" },
-  { text: "it's okay to not be okay. take your time, healing itu butuh proses", color: "bg-gradient-to-br from-[#7FDBDA] via-[#A0EBD5] to-[#B4F4D3]", icon: IoFlowerSharp, shadow: "shadow-teal-400/50" },
-  { text: "kamu gasendiri kok, banyak yang support kamu termasuk aku", color: "linear-gradient(135deg, #FF85A1 0%, #FFA6BF 100%)", icon: IoHeartSharp, shadow: "shadow-pink-400/50" },
-  { text: "besok pasti ada hari yang lebih baik, percaya deh", color: "linear-gradient(135deg, #FFD93D 0%, #FFE76D 100%)", icon: IoSunnySharp, shadow: "shadow-yellow-400/50" },
-  { text: "jangan compare diri kamu sama orang lain. you're doing great at your own pace", color: "linear-gradient(135deg, #6DAEDB 0%, #8DCFFF 100%)", icon: IoRocketSharp, shadow: "shadow-blue-400/50" },
-  { text: "self care bukan egois kok, kamu boleh prioritasin diri sendiri", color: "linear-gradient(135deg, #FFB088 0%, #FFC5A1 100%)", icon: IoCafeSharp, shadow: "shadow-orange-400/50" },
-  { text: "small steps tetep steps. proud of you for trying", color: "linear-gradient(135deg, #C77DFF 0%, #D9A5FF 100%)", icon: IoSparklesSharp, shadow: "shadow-purple-400/50" },
-  { text: "jangan lupa, kamu udah survive 100% dari hari terburukmu sebelumnya", color: "linear-gradient(135deg, #FFA07A 2%, #FFB89F 98%)", icon: IoRocketSharp, shadow: "shadow-orange-300/50" },
-  { text: "it's okay to rest. kamu bukan robot, butuh recharge juga", color: "linear-gradient(135deg, #89CFF0 0%, #A8DDFF 100%)", icon: IoSparklesSharp, shadow: "shadow-blue-300/50" },
-  { text: "kamu sudah cukup. you are enough just the way you are", color: "linear-gradient(135deg, #FF7A9A 0%, #FF99B4 100%)", icon: IoHeartSharp, shadow: "shadow-pink-400/50" },
+  { text: "kadang hidup emang berat, tapi kamu kuat kok. pasti bisa lewatin semua ini", color: "bg-[#FFB6D9]", icon: IoRocketSharp, shadow: "shadow-pink-500/50" },
+  { text: "it's okay to not be okay. take your time, healing itu butuh proses", color: "bg-[#A0E7E5]", icon: IoFlowerSharp, shadow: "shadow-teal-400/50" },
+  { text: "kamu gasendiri kok, banyak yang support kamu termasuk aku", color: "bg-[#FFA6BF]", icon: IoHeartSharp, shadow: "shadow-pink-400/50" },
+  { text: "besok pasti ada hari yang lebih baik, percaya deh", color: "bg-[#FFE799]", icon: IoSunnySharp, shadow: "shadow-yellow-400/50" },
+  { text: "jangan compare diri kamu sama orang lain. you're doing great at your own pace", color: "bg-[#A8DDFF]", icon: IoRocketSharp, shadow: "shadow-blue-400/50" },
+  { text: "self care bukan egois kok, kamu boleh prioritasin diri sendiri", color: "bg-[#FFC5A1]", icon: IoCafeSharp, shadow: "shadow-orange-400/50" },
+  { text: "small steps tetep steps. proud of you for trying", color: "bg-[#E0CFFC]", icon: IoSparklesSharp, shadow: "shadow-purple-400/50" },
+  { text: "jangan lupa, kamu udah survive 100% dari hari terburukmu sebelumnya", color: "bg-[#FFD4B2]", icon: IoRocketSharp, shadow: "shadow-orange-300/50" },
+  { text: "it's okay to rest. kamu bukan robot, butuh recharge juga", color: "bg-[#C7EBFF]", icon: IoSparklesSharp, shadow: "shadow-blue-300/50" },
+  { text: "kamu sudah cukup. you are enough just the way you are", color: "bg-[#FFAAC7]", icon: IoHeartSharp, shadow: "shadow-pink-400/50" },
 ];
 
 // Final card - separate from compliments
 const finalCard = { 
   text: "udah ya, sekarang semangat jalanin harinya! kamu pasti bisa, have a great day!", 
-  color: "bg-gradient-to-br from-[#FFD700] via-[#FFB6D9] to-[#B794F6]", 
+  color: "bg-gradient-to-br from-[#FFB6D9] to-[#D9A5FF]", 
   icon: IoSunnySharp,
-  shadow: "shadow-yellow-500/60"
+  shadow: "shadow-pink-500/60"
 };
 
 const bgColors = [
-  "linear-gradient(135deg, #FF9ECD 0%, #FF6BA9 100%)",
-  "linear-gradient(135deg, #A8E6CF 0%, #7FDBDA 100%)", 
-  "linear-gradient(135deg, #FFD3B6 0%, #FFB088 100%)",
-  "linear-gradient(135deg, #C9A9E0 0%, #B794F6 100%)",
-  "linear-gradient(135deg, #B5E7FF 0%, #89CFF0 100%)",
-  "linear-gradient(135deg, #FFE76D 0%, #FFD93D 100%)",
-  "linear-gradient(135deg, #FF8FB3 0%, #FF6B9D 100%)",
-  "linear-gradient(135deg, #C7EBFF 0%, #A8DDFF 100%)",
+  "#FFB6D9",
+  "#A0E7E5", 
+  "#FFC5A1",
+  "#D9A5FF",
+  "#A8DDFF",
+  "#FFE799",
+  "#FFD4E5",
+  "#E0CFFC",
+  "#B4F4E7",
+  "#FFD4B2",
 ];
 
 export default function ComplimentsPage() {
   const [count, setCount] = useState(0);
   const [currentCompliment, setCurrentCompliment] = useState<typeof compliments[0] | null>(null);
-  const [bgColor, setBgColor] = useState("linear-gradient(135deg, #FF9ECD 0%, #FF6BA9 100%)");
+  const [bgColor, setBgColor] = useState("#FFB6D9");
   const [isFinished, setIsFinished] = useState(false);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -93,10 +95,10 @@ export default function ComplimentsPage() {
     const newCount = count + 1;
     setCount(newCount);
     
-    // After showing all 15 compliments, show final card
+    // After showing all 14 compliments, show final card
     if (newCount > compliments.length) {
       setCurrentCompliment(finalCard);
-      setBgColor("linear-gradient(135deg, #FFD3B6 0%, #FFF4A3 50%, #FFB6D9 100%)");
+      setBgColor("linear-gradient(135deg, #FFB6D9 0%, #D9A5FF 100%)");
       setIsFinished(true);
     } else {
       // Get sequential compliment based on count (index 0-14)
@@ -133,20 +135,8 @@ export default function ComplimentsPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-gradient-to-br from-[#FF6BA9] via-[#C77DFF] to-[#6DAEDB] flex items-center justify-center z-50"
+          className="absolute inset-0 bg-[#FFB6D9] flex items-center justify-center z-50"
         >
-          {/* Animated gradient overlay */}
-          <motion.div
-            animate={{
-              background: [
-                'radial-gradient(circle at 20% 50%, rgba(255, 107, 169, 0.3) 0%, transparent 50%)',
-                'radial-gradient(circle at 80% 50%, rgba(199, 125, 255, 0.3) 0%, transparent 50%)',
-                'radial-gradient(circle at 50% 80%, rgba(109, 174, 219, 0.3) 0%, transparent 50%)',
-              ]
-            }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0"
-          />
           <div className="relative z-10 text-center px-4 sm:px-6">
             <motion.div
               animate={{
@@ -214,24 +204,12 @@ export default function ComplimentsPage() {
               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
               whileTap={{ scale: 0.9 }}
               onClick={startExperience}
-              className="bg-gradient-to-r from-white to-pink-50 text-transparent bg-clip-text font-black text-xl sm:text-2xl md:text-3xl px-10 py-5 sm:px-14 sm:py-7 md:px-16 md:py-8 rounded-full shadow-2xl border-4 border-white hover:shadow-pink-500/50 transition-all relative overflow-hidden"
-              style={{ backgroundColor: 'white' }}
+              className="bg-white text-gray-800 font-black text-xl sm:text-2xl md:text-3xl px-10 py-5 sm:px-14 sm:py-7 md:px-16 md:py-8 rounded-full shadow-2xl border-4 border-white hover:shadow-pink-500/50 transition-all"
             >
-              <motion.div
-                animate={{
-                  background: [
-                    'linear-gradient(45deg, rgba(255,107,169,0.1) 0%, rgba(199,125,255,0.1) 100%)',
-                    'linear-gradient(225deg, rgba(255,107,169,0.1) 0%, rgba(199,125,255,0.1) 100%)',
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0"
-              />
               <motion.span
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-                className="flex items-center gap-2 sm:gap-3 relative z-10"
-                style={{ color: '#1F2937' }}
+                className="flex items-center gap-2 sm:gap-3"
               >
                 <IoGiftSharp className="text-2xl sm:text-3xl" />
                 <span>Mulai</span>
@@ -454,24 +432,13 @@ export default function ComplimentsPage() {
             animate={{
               boxShadow: [
                 '0 20px 60px rgba(255,255,255,0.3)',
-                '0 20px 60px rgba(255,107,169,0.4)',
-                '0 20px 60px rgba(199,125,255,0.4)',
+                '0 20px 60px rgba(255,182,217,0.4)',
                 '0 20px 60px rgba(255,255,255,0.3)',
               ]
             }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="bg-gradient-to-r from-white to-pink-50 text-gray-800 font-black text-base sm:text-xl md:text-2xl px-8 py-4 sm:px-10 sm:py-5 md:px-12 md:py-6 rounded-full border-4 border-white hover:shadow-3xl transition-all duration-300 relative overflow-hidden"
+            className="bg-white text-gray-800 font-black text-base sm:text-xl md:text-2xl px-8 py-4 sm:px-10 sm:py-5 md:px-12 md:py-6 rounded-full border-4 border-white hover:shadow-3xl transition-all duration-300 relative"
           >
-            <motion.div
-              animate={{
-                background: [
-                  'linear-gradient(45deg, rgba(255,107,169,0.1) 0%, rgba(199,125,255,0.1) 100%)',
-                  'linear-gradient(225deg, rgba(255,107,169,0.1) 0%, rgba(199,125,255,0.1) 100%)',
-                ]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute inset-0"
-            />
             <motion.span
               animate={{
                 scale: [1, 1.1, 1],
